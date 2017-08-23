@@ -17,13 +17,13 @@ class Client(Protocol):
             # join as observer
             req = sc_pb.RequestJoinGame(
                 observed_player_id=observed_player_id,
-                options=sc_pb.InterfaceOptions(raw=True)
+                options=sc_pb.InterfaceOptions(raw=True, score=True)
             )
         else:
             assert isinstance(race, Race)
             req = sc_pb.RequestJoinGame(
                 race=race.value,
-                options=sc_pb.InterfaceOptions(raw=True)
+                options=sc_pb.InterfaceOptions(raw=True, score=True)
             )
         result = await self._execute(join_game=req)
         return result
